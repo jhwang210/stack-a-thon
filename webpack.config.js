@@ -1,4 +1,10 @@
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const packageMeta = require('./package.json')
+
 module.exports = {
+  mode: 'development',
+  devtool: 'source-map',
   entry: [
     './client/index.js'
   ],
@@ -18,7 +24,16 @@ module.exports = {
             '@babel/preset-react'
           ]
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: packageMeta.title
+    })
+  ]
 }
